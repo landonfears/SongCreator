@@ -186,7 +186,6 @@
 				},
 				playSong: function(e){
 					e.preventDefault();
-					$(e.target).prop('disabled', true);
 					var song = this;
 					
 					//Build chords and frequencies before entering synth class
@@ -203,6 +202,7 @@
 						songData.chords.push([0,2,4]);
 					});
 					var songDataCount = songData.chords.length;
+					if(songDataCount) $(e.target).prop('disabled', true);
 					
 					var Synth = function(audiolet, frequency) {
 						AudioletGroup.call(this, audiolet, 0, 1);
@@ -274,7 +274,7 @@
 					var ckey = ckeya[0].toLowerCase();
 					var ckeytype = ckeya[1].toLowerCase();
 				
-					contentHTML += '<div class="col-sm-7">';
+					contentHTML += '<div class="col-sm-8">';
 					contentHTML += '<div class="btn-group btn-key" data-toggle="buttons">';
 					$.each(keys, function(index, value){
 						var atxt = (value.id == ckey) ? 'active' : '';
@@ -285,7 +285,7 @@
 					contentHTML += '</div>';
 					
 					
-					contentHTML += '<div class="col-sm-2">';
+					contentHTML += '<div class="col-sm-3">';
 					contentHTML += '<div class="btn-group btn-keytype" data-toggle="buttons">';
 					$.each(keytypes, function(index, value){
 						var atxt = (value.id == ckeytype) ? 'active' : '';
@@ -550,7 +550,7 @@
 						model: item
 					});
 					
-					var contentHTML = '<p><button type="button" class="btn btn-lg btn-info add-chord">Add Chord</button><button type="button" class="btn btn-lg btn-success play-song">Play Song</button> <div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"><span class="sr-only"></span></div></div></p>';
+					var contentHTML = '<p><button type="button" class="btn btn-lg btn-info add-chord">Add Chord</button><button type="button" class="btn btn-lg btn-success play-song"><i class="icon-white icon-music"></i> Play Song</button> <div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"><span class="sr-only"></span></div></div></p>';
 					
 					$('#song'+item.get('song_id'), this.el).append(contentHTML);
 					songView.render();
@@ -578,6 +578,8 @@
     <div class="container theme-showcase" role="main">
 		<div class="page-header">
         	<h1>Song Creator</h1>
+            <p>Technologies/Frameworks Used: Django, Tastypie REST API, Python, PostgreSQL, Bootstrap, Backbone.js, jQuery, Audiolet.js (for sound generation)</p>
+            <p>How to use: "Add Song" creates a tab that you can edit with the song name. "Add Chord" let's you add a key and major/minor chord. "Play Song" will play each chord you created.</p>
       	</div>
         
     </div> <!-- /container -->
